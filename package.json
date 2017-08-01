@@ -7,8 +7,9 @@
   "author": "Frederico Teixeira",
   "license": "MIT",
   "scripts": {
-    "start": "node server.js",
-    "dev": "./node_modules/nodemon/bin/nodemon.js server.js"
+    "start": "node src/server.js",
+    "dev": "./node_modules/nodemon/bin/nodemon.js src/server.js",
+    "test": "jest --watch"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^15.1.0",
@@ -17,6 +18,7 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-prettier": "^2.1.2",
     "eslint-plugin-react": "^7.1.0",
+    "jest": "^20.0.4",
     "nodemon": "^1.11.0",
     "prettier-eslint": "^6.4.2"
   },
