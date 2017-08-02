@@ -14,6 +14,7 @@ class App extends Component {
         <Intro>
           To get started, edit <code>src/App.js</code> and save to reload.
         </Intro>
+        <a href="http://localhost:4000/login">Login with GitHub</a>
       </Container>
     )
   }

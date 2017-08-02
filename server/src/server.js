@@ -8,7 +8,11 @@ const expressValidator = require('express-validator')
 const chalk = require('chalk')
 const session = require('express-session')
 const passport = require('passport')
+const { graphqlExpress, graphiqlExpress } = require('graphql-server-express')
 
+const schema = require('./schema')
+
+// ===========================
 dotenv.config()
 
 require('./config/passport')
@@ -44,6 +48,19 @@ app.use(
 )
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(
+  '/graphql',
+  graphqlExpress(req => ({
+    schema,
+    context: { user: req.user },
+  })),
+)
+app.use(
+  '/graphiql',
+  graphiqlExpress({
+    endpointURL: '/graphql',
+  }),
+)
 
 // routes ====================
 app.get('/', (req, res) => {
