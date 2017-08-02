@@ -1,5 +1,5 @@
 {
-  "name": "the-code-venture-fullstack-challenge",
+  "name": "client-fullstack-challenge",
   "version": "1.0.0",
   "description": "The Code Venture Full Stack Challenge",
   "main": "server.js",
@@ -12,7 +12,7 @@
     "test": "export MONGODB_URI_TEST=mongodb://localhost:27017/AppTest && jest --watch"
   },
   "devDependencies": {
-    "eslint-config-airbnb": "^15.1.0",
+    "eslint-config-airbnb-base": "^11.3.1",
     "eslint-config-prettier": "^2.3.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",

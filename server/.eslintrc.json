@@ -1,5 +1,5 @@
 {
-  "extends": [ "airbnb", "prettier" ],
+  "extends": [ "airbnb-base", "prettier" ],
   "env": {
     "es6": true,
     "node": true,
@@ -21,7 +21,6 @@
       {
         "semi": false,
         "singleQuote": true,
-        "jsxBracketSameLine": true,
         "trailingComma": "all"
       }
     ]

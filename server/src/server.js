@@ -46,6 +46,10 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 // routes ====================
+app.get('/', (req, res) => {
+  res.send('Welcome to full stack Server!')
+})
+
 app.get('/login', userController.getLogin)
 
 app.get('/auth/github', passport.authenticate('github'))
@@ -53,7 +57,7 @@ app.get(
   '/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   (req, res) => {
-    res.redirect(req.session.redirectTo)
+    res.redirect(req.session.redirectTo || '/')
   },
 )
 
