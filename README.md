@@ -10,8 +10,8 @@ Getting Started
 ---------------
 ```
 git clone --depth 1 https://github.com/mrfrederico-ist/the-code-venture-fullstack-challenge.git
-cd the-code-venture-fullstack-challenge/server && yarn install
-# in another terminal navigate to the-code-venture-fullstack-challenge folder
+# open 2 terminals and navigate to the-code-venture-fullstack-challenge folder
+cd server && yarn install
 cd client && yarn install
 ```
 
@@ -39,6 +39,7 @@ GITHUB_SECRET=<Client Secret>
 Run Project
 -------------------------------------
 ```
+# open 2 terminals and navigate to the-code-venture-fullstack-challenge folder
 cd server && yarn dev
 cd client && yarn dev
 ```
