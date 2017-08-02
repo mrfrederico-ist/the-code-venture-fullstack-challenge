@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "./node_modules/nodemon/bin/nodemon.js src/server.js",
-    "test": "jest --watch"
+    "test": "export MONGODB_URI_TEST=mongodb://localhost:27017/AppTest && jest --watch"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^15.1.0",
@@ -23,9 +23,17 @@
     "prettier-eslint": "^6.4.2"
   },
   "dependencies": {
+    "body-parser": "^1.17.2",
     "chalk": "^2.0.1",
+    "connect-mongo": "^1.3.2",
+    "cors": "^2.8.4",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
-    "morgan": "^1.8.2"
+    "express-session": "^1.15.4",
+    "express-validator": "^3.2.1",
+    "mongoose": "^4.11.5",
+    "morgan": "^1.8.2",
+    "passport": "^0.3.2",
+    "passport-github": "^1.1.0"
   }
 }
