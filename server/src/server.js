@@ -82,7 +82,8 @@ app.get('/', (req, res) => {
   res.send('Welcome to full stack Server!')
 })
 
-app.get('/login', userController.getLogin)
+app.get('/login', userController.login)
+app.get('/logout', userController.logout)
 
 app.get('/auth/github', passport.authenticate('github'))
 app.get(
