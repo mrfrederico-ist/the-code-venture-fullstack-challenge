@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import currentUserQuery from '../queries/currentUser'
 
-import logo from '../res/hacker_news_logo.png'
+import logo from '../res/hacker_news_logo.jpg'
 
 class Login extends Component {
   componentWillUpdate(nextProps) {
@@ -37,7 +37,7 @@ class Login extends Component {
 const Container = styled.div`
   max-width: 320px;
   width: 90%;
-  background-color: #3d5368;
+  background-color: #324659;
   padding: 40px;
   border-radius: 4px;
   transform: translate(-50%, -50%);
@@ -55,6 +55,7 @@ const Logo = styled.div`
 `
 
 const Button = styled.a`
+  color: #d0d8e1;
   background: #444;
   border: none;
   border-radius: 4px;

@@ -2,7 +2,7 @@
   "extends": ["airbnb-base", "react-app", "prettier"],
   "plugins": ["prettier"],
   "rules": {
-    "class-methods-use-this": 0,
+    "class-methods-use-this": "off",
     "no-unused-vars": "error",
     "no-underscore-dangle": "off",
     "prettier/prettier": [

@@ -6,6 +6,7 @@ import {
   ApolloClient,
   ApolloProvider,
 } from 'react-apollo'
+import { injectGlobal } from 'styled-components'
 
 import requireAuth from './components/requireAuth'
 import App from './components/App'
@@ -42,4 +43,12 @@ ReactDOM.render(
   document.getElementById('root'),
 )
 
+// eslint-disable-next-line no-unused-expressions
+injectGlobal`
+  body {
+    background-color:#3d5368;
+  }
+`
+
+// ===================
 registerServiceWorker()
