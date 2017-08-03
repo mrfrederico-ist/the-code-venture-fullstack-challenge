@@ -9,7 +9,8 @@ class Header extends Component {
       <Nav className="navbar navbar-default">
         <div className="container">
           <NavBrand
-            className="navbar-brand text-uppercase navbar-link"
+            style={{ color: '#d0d8e1' }}
+            className="navbar-brand text-uppercase"
             href="/"
           >
             <img src={logo} alt="logo" />
@@ -48,30 +49,29 @@ const Nav = styled.nav`
   background: #324659;
   padding-top: 10px;
   padding-bottom: 10px;
-  color: #d0d8e1;
   border-radius: 0;
   box-shadow: none;
   border: none;
   margin-bottom: 0;
 `
 
-const NavToggle = styled.button`border: none;`
-
-const IconBar = styled.span`
-  background-color: red;
+const NavToggle = styled.button`
+  border: none;
 
   :hover,
   :focus {
-    background: none;
+    background: none !important;
   }
 `
+
+const IconBar = styled.span`background-color: #d0d8e1 !important;`
 
 const NavCollapsed = styled.div`border-top-color: #3d5368;`
 
 const Action = styled.a`
   margin-right: 7px;
   text-decoration: none;
-  color: #d0d8e1;
+  color: #d0d8e1 !important;
 `
 
 const NavBrand = styled.a`
@@ -79,7 +79,7 @@ const NavBrand = styled.a`
   color: inherit;
 
   :hover {
-    color: #b4b8be;
+    color: #b4b8be !important;
   }
 
   > img {
