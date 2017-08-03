@@ -8,26 +8,26 @@ class Header extends Component {
     return (
       <Nav className="navbar navbar-default">
         <div className="container">
-          <NavHeader>
-            <NavBrand
-              className="navbar-brand text-uppercase navbar-link"
-              href="/"
-            >
-              <img src={logo} alt="logo" />
-              Hacker News
-            </NavBrand>
-            <NavToggle
-              className="navbar-toggle collapsed"
-              data-toggle="collapse"
-              data-target="#navcol-1"
-            >
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar" />
-              <span className="icon-bar" />
-              <span className="icon-bar" />
-            </NavToggle>
-          </NavHeader>
-          <NavCollapsed id="navcol-1">
+          <NavBrand
+            className="navbar-brand text-uppercase navbar-link"
+            href="/"
+          >
+            <img src={logo} alt="logo" />
+            Hacker News
+          </NavBrand>
+
+          <NavToggle
+            className="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navcol-1"
+          >
+            <span className="sr-only">Toggle navigation</span>
+            <IconBar className="icon-bar" />
+            <IconBar className="icon-bar" />
+            <IconBar className="icon-bar" />
+          </NavToggle>
+
+          <NavCollapsed className="collapse navbar-collapse" id="navcol-1">
             <p className="navbar-text navbar-right">
               <Action
                 className="navbar-link"
@@ -55,16 +55,14 @@ const Nav = styled.nav`
   margin-bottom: 0;
 `
 
-const NavToggle = styled.button`
-  border: none;
+const NavToggle = styled.button`border: none;`
+
+const IconBar = styled.span`
+  background-color: red;
 
   :hover,
   :focus {
     background: none;
-  }
-
-  .icon-bar {
-    background-color: #d0d8e1;
   }
 `
 
@@ -74,14 +72,6 @@ const Action = styled.a`
   margin-right: 7px;
   text-decoration: none;
   color: #d0d8e1;
-`
-
-const NavHeader = styled.div`
-@media (max-width: 767px) {
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-}
 `
 
 const NavBrand = styled.a`
