@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import {
   createNetworkInterface,
   ApolloClient,
-  ApolloProvider
+  ApolloProvider,
 } from 'react-apollo'
 
 import requireAuth from './components/requireAuth'
@@ -24,7 +24,7 @@ const dataIdFromObject = obj => {
 
 const networkInterface = createNetworkInterface({
   uri: 'http://localhost:4000/graphql',
-  opts: { credentials: 'include' }
+  opts: { credentials: 'include' },
 })
 
 const client = new ApolloClient({ networkInterface, dataIdFromObject })
@@ -39,7 +39,7 @@ ReactDOM.render(
       </Switch>
     </BrowserRouter>
   </ApolloProvider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 )
 
 registerServiceWorker()
