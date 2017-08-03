@@ -1,0 +1,45 @@
+.login {
+  max-width: 320px;
+  width: 90%;
+  background-color: #324659;
+  padding: 40px;
+  border-radius: 4px;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #fff;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
+}
+
+.login .illustration {
+  text-align: center;
+  padding: 15px 0 20px;
+  font-size: 100px;
+}
+
+.login .btn-primary {
+  background: #444;
+  border: none;
+  border-radius: 4px;
+  padding: 11px;
+  box-shadow: none;
+  margin-top: 26px;
+  text-shadow: none;
+  outline: none;
+}
+
+.login .btn-primary:active {
+  transform: translateY(1px);
+}
+
+.login .btn-primary:hover,
+.login .btn-primary:active {
+  background: #2b2b2b;
+  outline: none;
+}
+
+.login .btn-primary .fa {
+  padding: 5px;
+  font-size: 18px;
+}

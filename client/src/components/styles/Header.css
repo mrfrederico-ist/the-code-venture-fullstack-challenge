@@ -1,0 +1,56 @@
+.navigation {
+  background: #324659;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #d0d8e1;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  margin-bottom: 0;
+}
+
+@media (max-width: 767px) {
+  .navigation .navbar-header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+.navigation .navbar-brand {
+  font-weight: bold;
+  color: inherit;
+}
+
+.navigation .navbar-brand img {
+  height: 100%;
+  display: inline-block;
+  margin-right: 10px;
+  width: auto;
+}
+
+.navigation .navbar-toggle .icon-bar {
+  background-color: #d0d8e1;
+}
+
+.navigation .navbar-brand:hover {
+  color: #b4b8be;
+}
+
+.navigation .navbar-toggle:hover,
+.navigation .navbar-toggle:focus {
+  background: none;
+}
+
+.navigation .navbar-toggle {
+  border: none;
+}
+
+.navigation .navbar-collapse {
+  border-top-color: #3d5368;
+}
+
+.navigation .actions .logout {
+  margin-right: 7px;
+  text-decoration: none;
+  color: #d0d8e1;
+}
