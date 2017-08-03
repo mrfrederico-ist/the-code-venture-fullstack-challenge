@@ -5,6 +5,7 @@ const resolvers = require('./resolvers')
 const typeDefs = `
   type User {
     id: ID!
+    githubId: ID!
     token: String
   }
 

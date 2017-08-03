@@ -21,12 +21,12 @@ passport.use(
       callbackURL: '/auth/github/callback',
     },
     (accessToken, refreshToken, profile, done) => {
-      User.findOne({ github: profile.id }, (err, existingUser) => {
+      User.findOne({ githubId: profile.id }, (err, existingUser) => {
         if (err) return done(err)
         if (existingUser) return done(null, existingUser)
 
         const user = new User()
-        user.github = profile.id
+        user.githubId = profile.id
         user.token = accessToken
 
         user.save(err => done(err, user))
