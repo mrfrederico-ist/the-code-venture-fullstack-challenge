@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 
 import Header from './Header'
+import NewsList from './NewsList'
 
 class App extends Component {
   render() {
-    return <Header />
+    return (
+      <div>
+        <Header />
+        <NewsList />
+      </div>
+    )
   }
 }
 
