@@ -13,10 +13,6 @@ class Login extends Component {
   }
 
   render() {
-    if (this.props.data.loading) {
-      return <div />
-    }
-
     return (
       <Container>
         <Logo>
@@ -25,7 +21,8 @@ class Login extends Component {
         <Button
           href="http://localhost:4000/login"
           className="btn btn-primary btn-block"
-          role="button">
+          role="button"
+        >
           <i className="fa fa-github" /> Sign in with GitHub
         </Button>
       </Container>
