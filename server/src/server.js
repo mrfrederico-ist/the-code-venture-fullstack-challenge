@@ -7,6 +7,7 @@ const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
 const chalk = require('chalk')
 const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
 const passport = require('passport')
 const { graphqlExpress, graphiqlExpress } = require('graphql-server-express')
 
@@ -35,15 +36,29 @@ mongoose.connection.on('error', err => {
 
 // Express configuration =====
 app.set('port', 4000)
-app.use(cors())
+
+const whitelist = ['http://localhost:3000']
+const corsOptions = {
+  origin(origin, callback) {
+    const originIsWhitelisted = whitelist.indexOf(origin) !== -1
+    callback(null, originIsWhitelisted)
+  },
+  credentials: true,
+}
+
+app.use(cors(corsOptions))
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(expressValidator())
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
+    secret: process.env.SESSION_SECRET,
+    store: new MongoStore({
+      url: process.env.MONGODB_URI,
+      autoReconnect: true,
+    }),
   }),
 )
 app.use(passport.initialize())

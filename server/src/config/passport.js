@@ -19,8 +19,9 @@ passport.use(
       clientID: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
       callbackURL: '/auth/github/callback',
+      passReqToCallback: true,
     },
-    (accessToken, refreshToken, profile, done) => {
+    (req, accessToken, refreshToken, profile, done) => {
       User.findOne({ githubId: profile.id }, (err, existingUser) => {
         if (err) return done(err)
         if (existingUser) return done(null, existingUser)

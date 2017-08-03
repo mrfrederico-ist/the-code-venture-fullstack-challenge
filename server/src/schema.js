@@ -10,7 +10,7 @@ const typeDefs = `
   }
 
   type Query {
-    loggedInUser: User
+    user: User
   }
 `
 

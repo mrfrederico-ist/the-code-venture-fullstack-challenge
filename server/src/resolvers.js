@@ -1,11 +1,11 @@
-const loggedInUserHandler = async (rootValue, args, { user }) => {
+const userHandler = (rootValue, args, { user }) => {
   if (user) return user
   return null
 }
 
 const resolverMap = {
   Query: {
-    loggedInUser: loggedInUserHandler,
+    user: userHandler,
   },
 }
 

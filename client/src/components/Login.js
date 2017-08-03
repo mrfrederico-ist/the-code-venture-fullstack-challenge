@@ -1,10 +1,22 @@
 import React, { Component } from 'react'
+import { graphql } from 'react-apollo'
 import styled from 'styled-components'
+
+import currentUserQuery from '../queries/currentUser'
 
 import logo from '../res/hacker_news_logo.png'
 
 class Login extends Component {
+  componentWillUpdate(nextProps) {
+    if (!this.props.data.user && nextProps.data.user)
+      this.props.history.push('/')
+  }
+
   render() {
+    if (this.props.data.loading) {
+      return <div />
+    }
+
     return (
       <Container>
         <Logo>
@@ -72,4 +84,4 @@ const Button = styled.a`
 `
 
 // ==================
-export default Login
+export default graphql(currentUserQuery)(Login)
