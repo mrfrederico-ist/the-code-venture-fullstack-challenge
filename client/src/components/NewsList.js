@@ -1,26 +1,34 @@
 import React, { Component } from 'react'
+import { graphql } from 'react-apollo'
+
+import './styles/NewsList.css'
 
 import News from './News'
-
-// constants =========
-const title =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a ipsum consectetur purus mollis tincidunt vitaeut orci. Mauris efficitur.'
-const numComments = 10000
-const creationDate = '17 minutes ago'
-const score = 60
+import topStoriesQuery from '../queries/topStories'
 
 class NewsList extends Component {
   render() {
+    if (this.props.data.loading) {
+      return <div className="loader">Loading...</div>
+    }
     return (
-      <News
-        title={title}
-        score={score}
-        numComments={numComments}
-        creationDate={creationDate}
-      />
+      <div>
+        {this.props.data.topStories.map(
+          ({ id, title, score, numComments, creationDate }) =>
+            <News
+              key={id}
+              title={title}
+              score={score}
+              numComments={numComments}
+              creationDate={creationDate}
+            />,
+        )}
+      </div>
     )
   }
 }
 
 // ==================
-export default NewsList
+export default graphql(topStoriesQuery, {
+  options: { variables: { first: 10, after: 0 } },
+})(NewsList)

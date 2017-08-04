@@ -13,6 +13,7 @@ const typeDefs = `
     id: ID!
     title: String
     url: String
+    score: Int
     numComments: Int
     commentsIds: [Int]
     creationDate: Int

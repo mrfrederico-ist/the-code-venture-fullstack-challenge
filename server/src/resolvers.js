@@ -18,18 +18,18 @@ const topStories = async (root, { first, after, reload }, { session }) => {
     session.storyIds = res.data
     data = res.data
   } else {
-    console.log('Saved in Session _|_')
     data = session.storyIds
   }
 
   const stories = data.slice(after, after + first).map(async storyId => {
     const res = await axios.get(`${HACKER_NEWS_ITEM_URI}${storyId}.json`)
 
-    const { id, title, url, descendants, kids, time } = res.data
+    const { id, title, url, score, descendants, kids, time } = res.data
     return {
       id,
       title,
       url,
+      score,
       numComments: descendants,
       commentsIds: kids,
       creationDate: time,
