@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <NewsList />
+        <NewsList first={10} after={0} reload={true} />
       </div>
     )
   }

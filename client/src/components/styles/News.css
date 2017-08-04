@@ -18,3 +18,16 @@
 .news-title {
   font-size:16px;
 }
+
+a {
+  color: #d0d8e1
+}
+
+a:hover,
+a:focus {
+  color: #b4b8be
+}
+
+a:visited {
+  color: #2780e3
+}

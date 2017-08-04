@@ -21,7 +21,9 @@ class News extends Component {
               <div className="row">
                 <div className="col-xs-12">
                   <p className="news-title">
-                    {this.props.title}
+                    <a href={this.props.url}>
+                      {this.props.title}
+                    </a>
                   </p>
                 </div>
               </div>

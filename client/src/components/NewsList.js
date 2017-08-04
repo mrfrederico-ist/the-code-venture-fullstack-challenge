@@ -9,14 +9,15 @@ import topStoriesQuery from '../queries/topStories'
 class NewsList extends Component {
   render() {
     if (this.props.data.loading) {
-      return <div className="loader">Loading...</div>
+      return <div className="loader" />
     }
     return (
       <div>
         {this.props.data.topStories.map(
-          ({ id, title, score, numComments, creationDate }) =>
+          ({ id, url, title, score, numComments, creationDate }) =>
             <News
               key={id}
+              url={url}
               title={title}
               score={score}
               numComments={numComments}
@@ -30,5 +31,7 @@ class NewsList extends Component {
 
 // ==================
 export default graphql(topStoriesQuery, {
-  options: { variables: { first: 10, after: 0 } },
+  options: ({ first, after, reload }) => ({
+    variables: { first, after, reload },
+  }),
 })(NewsList)
