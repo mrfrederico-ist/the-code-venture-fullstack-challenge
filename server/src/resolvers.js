@@ -11,13 +11,14 @@ const user = (rootValue, _, { user }) => {
   return null
 }
 
-const topStories = async (root, { first, after }, { session }) => {
+const topStories = async (root, { first, after, reload }, { session }) => {
   let data
-  if (!session.storyIds) {
+  if (!session.storyIds || reload) {
     const res = await axios.get(HACKER_NEWS_TOP_STORIES_URI)
     session.storyIds = res.data
     data = res.data
   } else {
+    console.log('Saved in Session _|_')
     data = session.storyIds
   }
 
@@ -40,25 +41,23 @@ const topStories = async (root, { first, after }, { session }) => {
   return stories
 }
 
-const storyComments = async (root, { storyId }) => {
-  const res = await axios.get(`${HACKER_NEWS_ITEM_URI}${storyId}.json`)
-
-  return res.data.kids.map(async commentId => {
+const comments = (root, { ids }) =>
+  ids.map(async commentId => {
     const res = await axios.get(`${HACKER_NEWS_ITEM_URI}${commentId}.json`)
 
-    const { id, by, text, time } = res.data
+    const { id, by, text, kids, time } = res.data
     return {
       id,
       author: by,
       text,
+      subCommentsIds: kids,
       creationDate: time,
     }
   })
-}
 
 // ================
 const resolverMap = {
-  Query: { user, topStories, storyComments },
+  Query: { user, topStories, comments },
 }
 
 // ================
