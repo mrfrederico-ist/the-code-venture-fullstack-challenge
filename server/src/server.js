@@ -67,7 +67,10 @@ app.use(
   '/graphql',
   graphqlExpress(req => ({
     schema,
-    context: { user: req.user },
+    context: {
+      user: req.user,
+      session: req.session,
+    },
   })),
 )
 app.use(

@@ -1,20 +1,28 @@
 const axios = require('axios')
 
+// constants ======
+const HACKER_NEWS_TOP_STORIES_URI =
+  'https://hacker-news.firebaseio.com/v0/topstories.json'
+const HACKER_NEWS_ITEM_URI = 'https://hacker-news.firebaseio.com/v0/item/'
+
 // handlers =======
-const user = (rootValue, args, { user }) => {
+const user = (rootValue, _, { user }) => {
   if (user) return user
   return null
 }
 
-const topStories = async (root, { first, after }) => {
-  const res = await axios.get(
-    'https://hacker-news.firebaseio.com/v0/topstories.json',
-  )
+const topStories = async (root, { first, after }, { session }) => {
+  let data
+  if (!session.storyIds) {
+    const res = await axios.get(HACKER_NEWS_TOP_STORIES_URI)
+    session.storyIds = res.data
+    data = res.data
+  } else {
+    data = session.storyIds
+  }
 
-  return res.data.slice(after, after + first).map(async storyId => {
-    const res = await axios.get(
-      `https://hacker-news.firebaseio.com/v0/item/${storyId}.json`,
-    )
+  const stories = data.slice(after, after + first).map(async storyId => {
+    const res = await axios.get(`${HACKER_NEWS_ITEM_URI}${storyId}.json`)
 
     const { id, title, url, descendants, kids, time } = res.data
     return {
@@ -26,17 +34,17 @@ const topStories = async (root, { first, after }) => {
       creationDate: time,
     }
   })
+
+  if (stories.length === 0) session.storyIds = undefined
+
+  return stories
 }
 
 const storyComments = async (root, { storyId }) => {
-  const res = await axios.get(
-    `https://hacker-news.firebaseio.com/v0/item/${storyId}.json`,
-  )
+  const res = await axios.get(`${HACKER_NEWS_ITEM_URI}${storyId}.json`)
 
   return res.data.kids.map(async commentId => {
-    const res = await axios.get(
-      `https://hacker-news.firebaseio.com/v0/item/${commentId}.json`,
-    )
+    const res = await axios.get(`${HACKER_NEWS_ITEM_URI}${commentId}.json`)
 
     const { id, by, text, time } = res.data
     return {
