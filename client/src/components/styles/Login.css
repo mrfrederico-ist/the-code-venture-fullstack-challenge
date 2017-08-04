@@ -1,4 +1,4 @@
-.login {
+.login-component {
   max-width: 320px;
   width: 90%;
   background-color: #324659;
@@ -12,13 +12,13 @@
   box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
 }
 
-.login .illustration {
+.login-component .illustration {
   text-align: center;
   padding: 15px 0 20px;
   font-size: 100px;
 }
 
-.login .btn-primary {
+.login-component .btn-primary {
   background: #444;
   border: none;
   border-radius: 4px;
@@ -29,17 +29,17 @@
   outline: none;
 }
 
-.login .btn-primary:active {
+.login-component .btn-primary:active {
   transform: translateY(1px);
 }
 
-.login .btn-primary:hover,
-.login .btn-primary:active {
+.login-component .btn-primary:hover,
+.login-component .btn-primary:active {
   background: #2b2b2b;
   outline: none;
 }
 
-.login .btn-primary .fa {
+.login-component .btn-primary .fa {
   padding: 5px;
   font-size: 18px;
 }

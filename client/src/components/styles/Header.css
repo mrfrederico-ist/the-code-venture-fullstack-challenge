@@ -1,4 +1,4 @@
-.navigation {
+.header-component {
   background: #324659;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -8,40 +8,40 @@
   margin-bottom: 0;
 }
 
-.navigation .navbar-brand {
+.header-component .navbar-brand {
   font-weight: bold;
   color: inherit;
 }
 
-.navigation .navbar-brand img {
+.header-component .navbar-brand img {
   height: 100%;
   display: inline-block;
   margin-right: 10px;
   width: auto;
 }
 
-.navigation .navbar-toggle .icon-bar {
+.header-component .navbar-toggle .icon-bar {
   background-color: #d0d8e1;
 }
 
-.navigation .navbar-brand:hover {
+.header-component .navbar-brand:hover {
   color: #b4b8be;
 }
 
-.navigation .navbar-toggle:hover,
-.navigation .navbar-toggle:focus {
+.header-component .navbar-toggle:hover,
+.header-component .navbar-toggle:focus {
   background: none;
 }
 
-.navigation .navbar-toggle {
+.header-component .navbar-toggle {
   border: none;
 }
 
-.navigation .navbar-collapse {
+.header-component .navbar-collapse {
   border-top-color: #3d5368;
 }
 
-.navigation .actions .logout {
+.header-component .actions .logout {
   margin-right: 7px;
   text-decoration: none;
   color: #d0d8e1;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 
-import './styles/NewsList.css'
+import './styles/Loader.css'
 
 import News from './News'
 import topStoriesQuery from '../queries/topStories'

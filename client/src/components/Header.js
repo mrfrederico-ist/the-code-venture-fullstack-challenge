@@ -7,7 +7,7 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-default navigation">
+        <nav className="navbar navbar-default header-component ">
           <div className="container">
             <div className="navbar-header">
               <a className="navbar-brand text-uppercase navbar-link" href="/">

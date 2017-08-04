@@ -14,7 +14,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login">
+      <div className="login login-component">
         <div className="illustration">
           <img src={logo} alt="logo" />
         </div>

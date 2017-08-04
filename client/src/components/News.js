@@ -5,7 +5,7 @@ import './styles/News.css'
 class News extends Component {
   render() {
     return (
-      <div className="container">
+      <div className="container news-component">
         <div className="well well-sm news-well">
           <div className="row">
             <div className="col-sm-1 col-xs-2">
