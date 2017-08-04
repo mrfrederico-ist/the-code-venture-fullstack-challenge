@@ -13,24 +13,25 @@ const typeDefs = `
     id: ID!
     title: String
     url: String
+    creationDate: Int
     score: Int
     numComments: Int
-    commentsIds: [Int]
-    creationDate: Int
+    comments: [Comment]
   }
 
   type Comment {
     id: ID!
     author: String
-    text: String
-    subCommentsIds: [Int]
     creationDate: Int
+    text: String
+    numComments: Int
+    comments: [Comment]
   }
 
   type Query {
     user: User
     topStories(first: Int, after: Int, reload: Boolean): [Story]
-    comments(ids: [Int]): [Comment]
+    storyComments(id: Int): [Comment]
   }
 `
 

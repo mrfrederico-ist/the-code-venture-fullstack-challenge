@@ -41,8 +41,17 @@ const topStories = async (root, { first, after, reload }, { session }) => {
   return stories
 }
 
-const comments = (root, { ids }) =>
-  ids.map(async commentId => {
+const comments = async (root, { id }) => {
+  let storyId
+  if (root) storyId = root.id
+  else storyId = id
+
+  const res = await axios.get(`${HACKER_NEWS_ITEM_URI}${storyId}.json`)
+  const ids = res.data.kids
+
+  if (!ids) return []
+
+  return ids.map(async commentId => {
     const res = await axios.get(`${HACKER_NEWS_ITEM_URI}${commentId}.json`)
 
     const { id, by, text, kids, time } = res.data
@@ -50,14 +59,21 @@ const comments = (root, { ids }) =>
       id,
       author: by,
       text,
-      subCommentsIds: kids,
+      numComments: kids ? kids.length : 0,
       creationDate: time,
     }
   })
+}
 
 // ================
 const resolverMap = {
-  Query: { user, topStories, comments },
+  Query: {
+    user,
+    topStories,
+    storyComments: comments,
+  },
+  Story: { comments },
+  Comment: { comments },
 }
 
 // ================
