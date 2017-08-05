@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import './styles/Header.css'
-import logo from '../res/hacker_news_logo.jpg'
+import logo from '../res/hacker_news_logo.png'
 
 class Header extends Component {
   render() {
@@ -12,7 +12,7 @@ class Header extends Component {
             <div className="navbar-header">
               <a className="navbar-brand text-uppercase navbar-link" href="/">
                 <img src={logo} alt="logo" />
-                Hacker News
+                Top Stories
               </a>
               <button
                 className="navbar-toggle collapsed"

@@ -18,6 +18,11 @@
   font-size: 100px;
 }
 
+.login-component .illustration img {
+  height: 100px;
+  width: auto;
+}
+
 .login-component .btn-primary {
   background: #444;
   border: none;

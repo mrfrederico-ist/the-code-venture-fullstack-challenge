@@ -4,7 +4,7 @@ import { graphql } from 'react-apollo'
 import currentUserQuery from '../queries/currentUser'
 
 import './styles/Login.css'
-import logo from '../res/hacker_news_logo.jpg'
+import logo from '../res/hacker_news_logo.png'
 
 class Login extends Component {
   componentWillUpdate(nextProps) {
