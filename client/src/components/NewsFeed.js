@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 
+import './styles/NewsFeed.css'
 import './styles/Loader.css'
 
 import NewsList from './NewsList'
@@ -10,15 +11,12 @@ class NewsFeed extends Component {
   render() {
     const { loading, topStories, loadMoreStories } = this.props
 
-    if (loading) {
-      return <div className="loader" />
-    }
-
     return (
-      <div>
+      <div className="news-feed-component">
         <NewsList stories={topStories || []} />
-        <div style={{ textAlign: 'center', padding: 15 }}>
-          <button className="btn btn-primary" onClick={loadMoreStories}>
+        <div className="btn-container">
+          {loading ? <div className="loader" /> : null}
+          <button className="btn btn-load-more" onClick={loadMoreStories}>
             Load more stories
           </button>
         </div>
@@ -30,7 +28,8 @@ class NewsFeed extends Component {
 // ==================
 export default graphql(topStoriesQuery, {
   options: () => ({
-    variables: { first: 10, after: 0 },
+    variables: { first: 10, after: 0, reload: true },
+    notifyOnNetworkStatusChange: true,
   }),
   props({ data: { loading, topStories, fetchMore } }) {
     return {
@@ -38,7 +37,7 @@ export default graphql(topStoriesQuery, {
       topStories,
       loadMoreStories() {
         return fetchMore({
-          variables: { after: topStories.length },
+          variables: { after: topStories.length, reload: false },
           updateQuery: (previousResult, { fetchMoreResult }) => ({
             ...previousResult,
             topStories: [

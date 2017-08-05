@@ -1,0 +1,14 @@
+.news-feed-component .btn-container {
+  text-align: center;
+  padding: 15px;
+}
+
+.news-feed-component .btn-load-more {
+  background-color: #f5511e;
+  color: white;
+  font-weight: bold;
+}
+
+.news-feed-component .btn-load-more:focus {
+  outline: none;
+}
