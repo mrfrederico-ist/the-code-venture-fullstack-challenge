@@ -1,19 +1,12 @@
 import React, { Component } from 'react'
-import { graphql } from 'react-apollo'
-
-import './styles/Loader.css'
 
 import News from './News'
-import topStoriesQuery from '../queries/topStories'
 
 class NewsList extends Component {
   render() {
-    if (this.props.data.loading) {
-      return <div className="loader" />
-    }
     return (
       <div>
-        {this.props.data.topStories.map(
+        {this.props.stories.map(
           ({ id, url, title, score, numComments, creationDate }) =>
             <News
               key={id}
@@ -30,8 +23,4 @@ class NewsList extends Component {
 }
 
 // ==================
-export default graphql(topStoriesQuery, {
-  options: ({ first, after, reload }) => ({
-    variables: { first, after, reload },
-  }),
-})(NewsList)
+export default NewsList
