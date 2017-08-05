@@ -1,29 +1,33 @@
 .news-component .news-well {
-  background-color:#324659;
-  border:none;
-  margin-top:15px;
-  margin-bottom:0px;
+  background-color: #324659;
+  border: none;
+  margin-top: 15px;
+  margin-bottom: 0px;
 }
 
 .news-component .news-score-container {
-  font-size:27px;
-  text-align:center;
-  padding-right:0px;
+  font-size: 27px;
+  text-align: center;
+  padding-right: 0px;
 }
 
 .news-component .news-score {
-  background-color:#f5511e;
+  background-color: #f5511e;
 }
 
 .news-component .news-title {
-  font-size:16px;
+  font-size: 16px;
+}
+
+.news-component a {
+  text-decoration: none;
 }
 
 .news-component a:hover,
 .news-component a:focus {
-  color: #b4b8be
+  color: #b4b8be;
 }
 
 .news-component a:visited {
-  color: #B4B8C1
+  color: #b4b8c1;
 }

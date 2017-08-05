@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
+import moment from 'moment'
 
 import './styles/News.css'
 
 class News extends Component {
   render() {
+    const { score, url, title, numComments, creationDate } = this.props
+    const date = moment
+      .duration(new Date(creationDate * 1000).getMinutes(), 'minutes')
+      .humanize()
+
     return (
       <div className="container news-component">
         <div className="well well-sm news-well">
@@ -12,7 +18,7 @@ class News extends Component {
               <div className="row">
                 <div className="col-md-12 news-score-container">
                   <span className="label label-default news-score">
-                    {this.props.score}
+                    {score}
                   </span>
                 </div>
               </div>
@@ -21,8 +27,8 @@ class News extends Component {
               <div className="row">
                 <div className="col-xs-12">
                   <p className="news-title">
-                    <a href={this.props.url}>
-                      {this.props.title}
+                    <a href={url}>
+                      {title}
                     </a>
                   </p>
                 </div>
@@ -30,12 +36,12 @@ class News extends Component {
               <div className="row">
                 <div className="col-md-2 col-sm-3 col-xs-6">
                   <p>
-                    {this.props.numComments} comments
+                    {numComments} comments
                   </p>
                 </div>
                 <div>
                   <p>
-                    {this.props.creationDate}
+                    {date} ago
                   </p>
                 </div>
               </div>

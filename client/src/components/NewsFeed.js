@@ -36,8 +36,10 @@ export default graphql(topStoriesQuery, {
       loading,
       topStories,
       loadMoreStories() {
+        const after = topStories ? topStories.length : 0
+
         return fetchMore({
-          variables: { after: topStories.length, reload: false },
+          variables: { after, reload: false },
           updateQuery: (previousResult, { fetchMoreResult }) => ({
             ...previousResult,
             topStories: [
