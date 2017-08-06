@@ -4,12 +4,11 @@ import { withApollo } from 'react-apollo'
 import moment from 'moment'
 
 import './styles/News.css'
-
 import storyCommentsQuery from '../queries/storyComments'
 import Comments from './Comments'
 
 class News extends Component {
-  state = { modalIsOpen: false, loadingComments: false, comments: [] }
+  state = { modalIsOpen: false }
 
   render() {
     const { score, url, title, numComments, creationDate } = this.props
@@ -44,7 +43,10 @@ class News extends Component {
                 <div className="row">
                   <div className="col-md-2 col-sm-3 col-xs-6">
                     <p className="news-comments">
-                      <a onClick={() => this._openModal()}>
+                      <a
+                        onClick={() => this._openModal()}
+                        onMouseOver={this._preFetchComments}
+                      >
                         {numComments} comments
                       </a>
                     </p>
@@ -65,52 +67,40 @@ class News extends Component {
   }
 
   _renderModal = () => {
-    const { modalIsOpen, loadingComments } = this.state
+    const { modalIsOpen } = this.state
     return (
       <Modal
         isOpen={modalIsOpen}
-        onAfterOpen={this._fetchComments}
         contentLabel="Stories Comments Modal"
         style={{ content: { backgroundColor: '#3d5368' } }}
       >
         <bottom className="btn btn-default" onClick={this._closeModal}>
           Close
         </bottom>
-        {loadingComments ? <div className="loader" /> : this._renderComments()}
+        <Comments storyId={this.props.id} />
       </Modal>
     )
   }
 
   _openModal = () => {
-    this.setState({ modalIsOpen: true, loadingComments: true })
+    this.setState({ modalIsOpen: true })
   }
 
   _closeModal = () => {
     this.setState({ modalIsOpen: false })
   }
 
-  _fetchComments = async () => {
+  _preFetchComments = async () => {
     const { client, id } = this.props
-
-    this.setState({ loadingComments: true })
 
     const res = await client.query({
       query: storyCommentsQuery,
       variables: { id },
     })
-
-    this.setState({ loadingComments: false, comments: res.data.storyComments })
-  }
-
-  _renderComments = () => {
-    const { comments } = this.state
-    return comments.map(comment =>
-      <Comments
-        key={comment.id}
-        text={comment.text}
-        comments={comment.comments}
-      />,
-    )
+    client.writeQuery({
+      query: storyCommentsQuery,
+      data: res.data,
+    })
   }
 }
 
