@@ -10,6 +10,7 @@ class NewsList extends Component {
           ({ id, url, title, score, numComments, creationDate }) =>
             <News
               key={id}
+              id={id}
               url={url}
               title={title}
               score={score}

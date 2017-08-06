@@ -24,7 +24,7 @@ const typeDefs = `
     author: String
     creationDate: Int
     text: String
-    numComments: Int
+    hasKids: Boolean
     comments: [Comment]
   }
 

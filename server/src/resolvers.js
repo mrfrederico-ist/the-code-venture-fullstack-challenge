@@ -59,7 +59,7 @@ const comments = async (root, { id }) => {
       id,
       author: by,
       text,
-      numComments: kids ? kids.length : 0,
+      hasKids: !!kids,
       creationDate: time,
     }
   })
