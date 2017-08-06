@@ -8,7 +8,6 @@ import {
 } from 'react-apollo'
 
 import './index.css'
-import './loader.css'
 
 import requireAuth from './components/requireAuth'
 import App from './components/App'

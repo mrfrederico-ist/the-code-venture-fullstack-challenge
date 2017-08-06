@@ -5,6 +5,7 @@ import './styles/NewsFeed.css'
 
 import NewsList from './NewsList'
 import topStoriesQuery from '../queries/topStories'
+import { Loader, Reload, Error } from './common'
 
 class NewsFeed extends Component {
   render() {
@@ -12,11 +13,7 @@ class NewsFeed extends Component {
 
     return (
       <div className="news-feed-component">
-        {error
-          ? <div style={{ textAlign: 'center', padding: 15 }}>
-              Error connecting with server
-            </div>
-          : null}
+        {error ? <Error>Error connecting with server</Error> : null}
         <NewsList stories={topStories || []} />
         <div className="btn-container">
           {this._showLoadMore()}
@@ -27,14 +24,8 @@ class NewsFeed extends Component {
 
   _showLoadMore = () => {
     const { loading, topStories, loadMoreStories } = this.props
-    if (loading) return <div className="loader" />
-    else if (!topStories) {
-      return (
-        <a href="/">
-          <i className="fa fa-refresh" style={{ fontSize: '50' }} />
-        </a>
-      )
-    }
+    if (loading) return <Loader />
+    else if (!topStories) return <Reload href="/" />
     return (
       <button className="btn btn-load-more" onClick={loadMoreStories}>
         Load more stories

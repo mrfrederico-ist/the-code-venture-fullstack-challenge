@@ -4,21 +4,20 @@ import { graphql } from 'react-apollo'
 import './styles/Comments.css'
 
 import storyCommentsQuery from '../queries/storyComments'
+import { Loader, Reload, Error } from './common'
 
 class Comments extends Component {
   render() {
     const { data } = this.props
     let { comments } = this.props || []
 
-    if (data && data.loading) return <div className="loader" />
+    if (data && data.loading) return <Loader />
     else if (data) {
       if (data.error) {
         return (
-          <div style={{ textAlign: 'center' }}>
-            <div style={{ padding: 15 }}>Error connecting with server</div>
-            <a onClick={data.refetch()}>
-              <i className="fa fa-refresh" style={{ fontSize: 50 }} />
-            </a>
+          <div>
+            <Error>Error loading comments</Error>
+            <Reload onClick={data.refetch} />
           </div>
         )
       }
