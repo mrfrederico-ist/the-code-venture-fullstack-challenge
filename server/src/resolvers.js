@@ -5,8 +5,25 @@ const HACKER_NEWS_TOP_STORIES_URI =
   'https://hacker-news.firebaseio.com/v0/topstories.json'
 const HACKER_NEWS_ITEM_URI = 'https://hacker-news.firebaseio.com/v0/item/'
 
+// helpers ========
+const fetchData = async url => {
+  let res
+  try {
+    res = await axios.get(url)
+  } catch (error) {
+    if (error.code === 'ETIMEDOUT') {
+      try {
+        res = await axios.get(url)
+      } catch (error) {
+        throw new Error(error)
+      }
+    } else throw new Error(error)
+  }
+  return res
+}
+
 // handlers =======
-const user = (rootValue, _, { user }) => {
+const user = (rootValue, args, { user }) => {
   if (user) return user
   return null
 }
@@ -14,7 +31,7 @@ const user = (rootValue, _, { user }) => {
 const topStories = async (root, { first, after, reload }, { session }) => {
   let data
   if (!session.storyIds || reload) {
-    const res = await axios.get(HACKER_NEWS_TOP_STORIES_URI)
+    const res = await fetchData(HACKER_NEWS_TOP_STORIES_URI)
     session.storyIds = res.data
     data = res.data
   } else {
@@ -22,7 +39,7 @@ const topStories = async (root, { first, after, reload }, { session }) => {
   }
 
   const stories = data.slice(after, after + first).map(async storyId => {
-    const res = await axios.get(`${HACKER_NEWS_ITEM_URI}${storyId}.json`)
+    const res = await fetchData(`${HACKER_NEWS_ITEM_URI}${storyId}.json`)
 
     const { id, title, url, score, descendants, kids, time } = res.data
     return {
@@ -46,13 +63,13 @@ const comments = async (root, { id }) => {
   if (root) storyId = root.id
   else storyId = id
 
-  const res = await axios.get(`${HACKER_NEWS_ITEM_URI}${storyId}.json`)
+  const res = await fetchData(`${HACKER_NEWS_ITEM_URI}${storyId}.json`)
   const ids = res.data.kids
 
   if (!ids) return []
 
   return ids.map(async commentId => {
-    const res = await axios.get(`${HACKER_NEWS_ITEM_URI}${commentId}.json`)
+    const res = await fetchData(`${HACKER_NEWS_ITEM_URI}${commentId}.json`)
 
     const { id, by, text, kids, time } = res.data
     return {
