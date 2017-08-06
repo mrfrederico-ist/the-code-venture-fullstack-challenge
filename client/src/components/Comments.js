@@ -17,7 +17,7 @@ class Comments extends Component {
         return (
           <div>
             <Error>Error loading comments</Error>
-            <Reload onClick={data.refetch} />
+            <Reload onClick={() => data.refetch({ forceFetch: true })} />
           </div>
         )
       }

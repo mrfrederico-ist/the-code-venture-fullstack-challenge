@@ -23,9 +23,10 @@ class NewsFeed extends Component {
   }
 
   _showLoadMore = () => {
-    const { loading, topStories, loadMoreStories } = this.props
+    const { loading, refetch, topStories, loadMoreStories } = this.props
     if (loading) return <Loader />
-    else if (!topStories) return <Reload href="/" />
+    else if (!topStories)
+      return <Reload onClick={() => refetch({ forceFetch: true })} />
     return (
       <button className="btn btn-load-more" onClick={loadMoreStories}>
         Load more stories
@@ -40,10 +41,11 @@ export default graphql(topStoriesQuery, {
     variables: { first: 10, after: 0, reload: true },
     notifyOnNetworkStatusChange: true,
   }),
-  props({ data: { loading, error, topStories, fetchMore } }) {
+  props({ data: { loading, error, refetch, topStories, fetchMore } }) {
     return {
       loading,
       error,
+      refetch,
       topStories,
       loadMoreStories() {
         const after = topStories ? topStories.length : 0
