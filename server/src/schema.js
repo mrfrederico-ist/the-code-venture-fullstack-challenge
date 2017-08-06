@@ -21,6 +21,7 @@ const typeDefs = `
 
   type Comment {
     id: ID!
+    parent: Int
     author: String
     creationDate: Int
     text: String

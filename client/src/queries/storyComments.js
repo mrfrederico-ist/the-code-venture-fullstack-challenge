@@ -19,6 +19,7 @@ export default gql`
 
   fragment CommentFields on Comment {
     id
+    parent
     hasKids
     author
     text

@@ -71,9 +71,10 @@ const comments = async (root, { id }) => {
   return ids.map(async commentId => {
     const res = await fetchData(`${HACKER_NEWS_ITEM_URI}${commentId}.json`)
 
-    const { id, by, text, kids, time } = res.data
+    const { id, parent, by, text, kids, time } = res.data
     return {
       id,
+      parent,
       author: by,
       text,
       hasKids: !!kids,
