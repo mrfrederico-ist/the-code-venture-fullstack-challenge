@@ -66,23 +66,27 @@ class Comments extends Component {
   _fetchKids = async id => {
     const { client } = this.props
 
-    this._loadingKids(id, true)
+    try {
+      this._loadingKids(id, true)
 
-    const res = await client.query({
-      query: storyCommentsQuery,
-      variables: { id },
-    })
+      const res = await client.query({
+        query: storyCommentsQuery,
+        variables: { id },
+      })
 
-    this._loadingKids(id, false, res.data.storyComments)
+      this._loadingKids(id, false, res.data.storyComments)
+    } catch (error) {
+      this._loadingKids(id, false)
+    }
   }
 
   _loadingKids = (id, isLoading, newKids) => {
     const { loadingKids, kids } = this.state
 
-    loadingKids[id] = isLoading
-    kids[id] = newKids
-
-    this.setState({ loadingKids, kids })
+    this.setState({
+      loadingKids: { ...loadingKids, [id]: isLoading },
+      kids: { ...kids, [id]: newKids },
+    })
   }
 }
 
