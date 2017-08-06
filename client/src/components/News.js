@@ -71,6 +71,7 @@ class News extends Component {
     return (
       <Modal
         isOpen={modalIsOpen}
+        onRequestClose={this._closeModal}
         contentLabel="Stories Comments Modal"
         style={{ content: { backgroundColor: '#3d5368' } }}
       >
