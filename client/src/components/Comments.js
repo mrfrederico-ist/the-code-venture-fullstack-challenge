@@ -43,12 +43,12 @@ class Comments extends Component {
         .humanize()
 
       return (
-        <div key={id} className="well">
+        <div key={id} className="comment">
           <div className="row">
             <div className="col-md-12 comment-author">
-              <span className="label label-default">
+              <div className="label label-default">
                 {`${author} ${creationDate}`}
-              </span>
+              </div>
             </div>
           </div>
           <div className="row">
@@ -95,10 +95,10 @@ class Comments extends Component {
       if (loadingKids[comment.id]) return <Loader />
 
       return (
-        <div className="row">
+        <div className="row load-more">
           <div className="col-md-12" style={{ fontWeight: 'bold' }}>
             <a onClick={() => this.props.fetchCommentsKids(comment.id)}>
-              {`Load more comments (${comment.numKids} replies)`}
+              {`load more comments (${comment.numKids} replies)`}
             </a>
           </div>
         </div>

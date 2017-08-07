@@ -2,9 +2,9 @@
   list-style-type: none;
 }
 
-.comments-component .well {
+.comments-component .comment {
   background-color:#324659;
-  padding: 15px;
+  padding: 15px 15px 0 15px;
   margin-bottom: 15px;
 }
 
@@ -16,3 +16,6 @@
   margin-bottom: 5px;
 }
 
+.comments-component .load-more a {
+  color: #f5511e;
+}
