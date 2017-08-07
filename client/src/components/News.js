@@ -43,12 +43,14 @@ class News extends Component {
                 <div className="row">
                   <div className="col-md-2 col-sm-3 col-xs-6">
                     <p className="news-comments">
-                      <a
-                        onClick={() => this._openModal()}
-                        onMouseOver={this._preFetchComments}
-                      >
-                        {numComments} comments
-                      </a>
+                      {numComments > 0
+                        ? <a
+                            onClick={() => this._openModal()}
+                            onMouseOver={this._preFetchComments}
+                          >
+                            {numComments} comments
+                          </a>
+                        : 'no comments'}
                     </p>
                   </div>
                   <div>
@@ -75,9 +77,25 @@ class News extends Component {
         contentLabel="Stories Comments Modal"
         style={{ content: { backgroundColor: '#3d5368' } }}
       >
-        <bottom className="btn btn-default" onClick={this._closeModal}>
-          Close
-        </bottom>
+        <div className="modal-component">
+          <div className="row">
+            <div className="col-xs-10">
+              <a href={this.props.url}>
+                <h4 style={{ fontWeight: 'bold' }}>
+                  {this.props.title}
+                </h4>
+              </a>
+            </div>
+            <div
+              className="col-xs-2 text-right"
+              style={{ fontSize: 'x-large' }}
+            >
+              <a onClick={this._closeModal}>
+                <i className="fa fa-close" />
+              </a>
+            </div>
+          </div>
+        </div>
         <Comments storyId={this.props.id} />
       </Modal>
     )

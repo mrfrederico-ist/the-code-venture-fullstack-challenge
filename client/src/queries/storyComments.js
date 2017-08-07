@@ -21,7 +21,9 @@ export default gql`
     id
     parent
     hasKids
+    numKids
     author
+    creationDate
     text
   }
 `

@@ -1,4 +1,18 @@
-.comments-component div {
-  margin-left: 15px;
+.comments-component {
+  list-style-type: none;
+}
+
+.comments-component .well {
+  background-color:#324659;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.comments-component .comment-author .label {
+  background-color:#f5511e;
+}
+
+.comments-component .comment-author {
+  margin-bottom: 5px;
 }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { graphql, compose } from 'react-apollo'
 import { connect } from 'react-redux'
+import moment from 'moment'
 
 import './styles/Comments.css'
 
@@ -27,18 +28,40 @@ class Comments extends Component {
     }
 
     return (
-      <div className="comments-component">
-        {comments.map(comment =>
-          <div key={comment.id} className="comment">
-            <span>
-              {comment.text}
-            </span>
-            {this._renderKids(comment)}
-          </div>,
-        )}
-      </div>
+      <ul className="comments-component">
+        {this._renderComments(comments)}
+      </ul>
     )
   }
+
+  _renderComments = comments =>
+    comments.map(comment => {
+      const { id, author, text } = comment
+
+      const creationDate = moment
+        .duration(new Date(comment.creationDate * 1000).getMinutes(), 'minutes')
+        .humanize()
+
+      return (
+        <div key={id} className="well">
+          <div className="row">
+            <div className="col-md-12 comment-author">
+              <span className="label label-default">
+                {`${author} ${creationDate}`}
+              </span>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-12">
+              <li>
+                <p dangerouslySetInnerHTML={{ __html: text }} />
+                {this._renderKids(comment)}
+              </li>
+            </div>
+          </div>
+        </div>
+      )
+    })
 
   _renderKids = comment => {
     const { kids, loadingKids, error } = this.props.commentsKids
@@ -72,13 +95,12 @@ class Comments extends Component {
       if (loadingKids[comment.id]) return <Loader />
 
       return (
-        <div>
-          <button
-            className="btn btn-default"
-            onClick={() => this.props.fetchCommentsKids(comment.id)}
-          >
-            Load More
-          </button>
+        <div className="row">
+          <div className="col-md-12" style={{ fontWeight: 'bold' }}>
+            <a onClick={() => this.props.fetchCommentsKids(comment.id)}>
+              {`Load more comments (${comment.numKids} replies)`}
+            </a>
+          </div>
         </div>
       )
     }

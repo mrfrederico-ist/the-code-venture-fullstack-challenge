@@ -26,6 +26,7 @@ const typeDefs = `
     creationDate: Int
     text: String
     hasKids: Boolean
+    numKids: Int
     comments: [Comment]
   }
 
