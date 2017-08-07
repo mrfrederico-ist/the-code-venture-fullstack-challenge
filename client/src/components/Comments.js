@@ -10,12 +10,12 @@ import { Loader, Reload, Error } from './common'
 
 class Comments extends Component {
   render() {
-    const { data } = this.props
     let { comments } = this.props
 
-    if (data && data.loading) return <Loader />
-    else if (data) {
-      if (data.error) {
+    const { data } = this.props
+    if (data) {
+      if (data.loading) return <Loader />
+      else if (data.error) {
         return (
           <div>
             <Error>Error loading comments, please try again</Error>
@@ -25,6 +25,7 @@ class Comments extends Component {
       }
       comments = data.storyComments
     }
+
     return (
       <div className="comments-component">
         {comments.map(comment =>
@@ -40,7 +41,16 @@ class Comments extends Component {
   }
 
   _renderKids = comment => {
-    const { kids, loadingKids } = this.props.commentsKids
+    const { kids, loadingKids, error } = this.props.commentsKids
+
+    if (error[comment.id]) {
+      return (
+        <div>
+          <Error>Error loading more comments, please try again</Error>
+          <Reload onClick={() => this.props.fetchCommentsKids(comment.id)} />
+        </div>
+      )
+    }
 
     if (comment.comments) {
       return (

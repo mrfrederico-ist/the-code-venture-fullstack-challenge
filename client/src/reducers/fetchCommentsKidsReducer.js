@@ -7,7 +7,7 @@ import {
 const INITIAL_STATE = {
   loadingKids: {},
   kids: {},
-  error: false,
+  error: {},
 }
 
 export default (state = INITIAL_STATE, actions) => {
@@ -16,7 +16,7 @@ export default (state = INITIAL_STATE, actions) => {
       return {
         ...state,
         loadingKids: { ...state.loadingKids, [actions.payload.id]: true },
-        error: false,
+        error: { ...state.error, [actions.payload.id]: false },
       }
     case FETCH_COMMENTS_KIDS_SUCCESS:
       return {
@@ -27,7 +27,7 @@ export default (state = INITIAL_STATE, actions) => {
       return {
         ...state,
         loadingKids: { ...state.loadingKids, [actions.payload.id]: false },
-        error: true,
+        error: { ...state.error, [actions.payload.id]: true },
       }
     default:
       return state

@@ -6,7 +6,7 @@ import storyCommentsQuery from '../queries/storyComments'
 export const LOADING_COMMENTS_KIDS = 'LOADING_COMMENTS_KIDS'
 
 export const FETCH_COMMENTS_KIDS_SUCCESS = 'FETCH_COMMENTS_KIDS_SUCCESS'
-export const FETCH_COMMENTS_KIDS_FAIL = 'FETCH_COMMENTS_KIDS_SUCCESS'
+export const FETCH_COMMENTS_KIDS_FAIL = 'FETCH_COMMENTS_KIDS_FAIL'
 
 // ==================
 export default id => async dispatch => {
