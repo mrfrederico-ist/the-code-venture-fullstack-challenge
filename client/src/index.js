@@ -6,9 +6,12 @@ import {
   ApolloClient,
   ApolloProvider,
 } from 'react-apollo'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 
 import './index.css'
 
+import reducers from './reducers'
 import requireAuth from './components/requireAuth'
 import App from './components/App'
 import Login from './components/Login'
@@ -29,11 +32,16 @@ const networkInterface = createNetworkInterface({
   opts: { credentials: 'include' },
 })
 
-const client = new ApolloClient({ networkInterface, dataIdFromObject })
+export const apolloClient = new ApolloClient({
+  networkInterface,
+  dataIdFromObject,
+})
+
+const store = createStore(reducers, {}, applyMiddleware(thunk))
 
 // ====================
 ReactDOM.render(
-  <ApolloProvider client={client}>
+  <ApolloProvider client={apolloClient} store={store}>
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={requireAuth(App)} />

@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import { graphql, withApollo } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
+import { connect } from 'react-redux'
 
 import './styles/Comments.css'
 
+import fetchCommentsKids from '../actions/fetchCommentsKidsAction'
 import storyCommentsQuery from '../queries/storyComments'
 import { Loader, Reload, Error } from './common'
 
 class Comments extends Component {
-  state = { kids: {}, loadingKids: {} }
-
   render() {
     const { data } = this.props
     let { comments } = this.props
@@ -18,7 +18,7 @@ class Comments extends Component {
       if (data.error) {
         return (
           <div>
-            <Error>Error loading comments</Error>
+            <Error>Error loading comments, please try again</Error>
             <Reload onClick={() => data.refetch({ forceFetch: true })} />
           </div>
         )
@@ -40,12 +40,24 @@ class Comments extends Component {
   }
 
   _renderKids = comment => {
-    const { kids, loadingKids } = this.state
+    const { kids, loadingKids } = this.props.commentsKids
 
     if (comment.comments) {
-      return <Comments client={this.props.client} comments={comment.comments} />
+      return (
+        <Comments
+          commentsKids={this.props.commentsKids}
+          fetchCommentsKids={this.props.fetchCommentsKids}
+          comments={comment.comments}
+        />
+      )
     } else if (kids[comment.id]) {
-      return <Comments client={this.props.client} comments={kids[comment.id]} />
+      return (
+        <Comments
+          commentsKids={this.props.commentsKids}
+          fetchCommentsKids={this.props.fetchCommentsKids}
+          comments={kids[comment.id]}
+        />
+      )
     } else if (comment.hasKids) {
       if (loadingKids[comment.id]) return <Loader />
 
@@ -53,7 +65,7 @@ class Comments extends Component {
         <div>
           <button
             className="btn btn-default"
-            onClick={() => this._fetchKids(comment.id)}
+            onClick={() => this.props.fetchCommentsKids(comment.id)}
           >
             Load More
           </button>
@@ -62,38 +74,17 @@ class Comments extends Component {
     }
     return null
   }
-
-  _fetchKids = async id => {
-    const { client } = this.props
-
-    try {
-      this._loadingKids(id, true)
-
-      const res = await client.query({
-        query: storyCommentsQuery,
-        variables: { id },
-      })
-
-      this._loadingKids(id, false, res.data.storyComments)
-    } catch (error) {
-      this._loadingKids(id, false)
-    }
-  }
-
-  _loadingKids = (id, isLoading, newKids) => {
-    const { loadingKids, kids } = this.state
-
-    this.setState({
-      loadingKids: { ...loadingKids, [id]: isLoading },
-      kids: { ...kids, [id]: newKids },
-    })
-  }
 }
 
 // ==================
-export default graphql(storyCommentsQuery, {
-  options: ({ storyId }) => ({
-    variables: { id: storyId },
-    notifyOnNetworkStatusChange: true,
+const mapStateToProps = ({ commentsKids }) => ({ commentsKids })
+
+export default compose(
+  graphql(storyCommentsQuery, {
+    options: ({ storyId }) => ({
+      variables: { id: storyId },
+      notifyOnNetworkStatusChange: true,
+    }),
   }),
-})(withApollo(Comments))
+  connect(mapStateToProps, { fetchCommentsKids }),
+)(Comments)
