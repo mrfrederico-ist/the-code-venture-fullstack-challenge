@@ -4,7 +4,7 @@ Full Stack Challenge
 Prerequisites
 -------------
 - [MongoDB](https://www.mongodb.org/downloads)
-- [Node.js 6.0+](http://nodejs.org)
+- [Node.js 7.0+](http://nodejs.org)
 
 Getting Started
 ---------------
